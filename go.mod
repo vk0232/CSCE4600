@@ -1,4 +1,4 @@
-module github.com/vikask/CSCE4600
+module github.com/vk0232/CSCE4600
 
 go 1.19
 

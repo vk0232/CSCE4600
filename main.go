@@ -8,8 +8,7 @@ import (
 	"os/exec"
 	"os/user"
 	"strings"
-
-	"github.com/jh125486/CSCE4600/Project2/builtins"
+	"github.com/vk0232/CSCE4600/Project2/builtins"
 )
 
 func main() {
@@ -66,6 +65,7 @@ func printPrompt(w io.Writer) error {
 func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 	// Remove trailing spaces.
 	input = strings.TrimSpace(input)
+        //fmt.Printf("Entered handleInput\n")
 
 	// Split the input separate the command name and the command arguments.
 	args := strings.Split(input, " ")
@@ -78,7 +78,17 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.ChangeDirectory(args...)
 	case "env":
 		return builtins.EnvironmentVariables(w, args...)
-	case "exit":
+        case "mkdir":
+		return builtins.MakeDirectory(args...)
+        case "rmdir":
+                return builtins.RemoveDirectory(args...)
+        case "pwd":
+                 builtins.GetworkDirectory()
+        case "time":
+                 builtins.Gettime() 
+        case "mv":
+                return builtins.Renamefile(args...)
+        case "exit":
 		exit <- struct{}{}
 		return nil
 	}
